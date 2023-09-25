@@ -1,0 +1,48 @@
+GTFO BINS
+https://gtfobins.github.io/
+
+automated enumaration Tools 
+LinPeas: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS
+LinEnum: https://github.com/rebootuser/LinEnum
+LES (Linux Exploit Suggester): https://github.com/mzet-/linux-exploit-suggester
+Linux Smart Enumeration: https://github.com/diego-treitos/linux-smart-enumeration
+Linux Priv Checker: https://github.com/linted/linuxprivchecker
+
+
+
+List of one liners: 
+
+
+will list files that have SUID or SGID bits set.
+find / -type f -perm -04000 -ls 2>/dev/null
+
+Check for binaries with set capabilities
+getcap -r / 2>/dev/null
+
+Check for schedules
+cat /etc/crontab
+
+check for writable folders 
+find / -writable 2>/dev/null
+find / -writable 2>/dev/null | cut -d "/" -f 2,3 | grep -v proc | sort -u
+
+
+echo $PATH 
+add tmp direcroty to path
+export PATH=/tmp:$PATH
+
+find vulnerable NFS, look for no_root_squash in the victim machine
+cat /etc/exports
+
+enumerate mountable shares from attacking machine
+showmount -e victim-ip 
+
+ mount one of the “no_root_squash” shares to our attacking machine and start building our executable
+mkdir /tmp/attackerpayload
+mount -o rw 10.0.2.12:/targetfolder /tmp/attackerpayload
+
+
+
+
+
+
